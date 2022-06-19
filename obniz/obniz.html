@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://unpkg.com/obniz@3.x/obniz.js" crossorigin="anonymous" ></script>
+    <script src="https://js.cybozu.com/kintone-rest-api-client/1.4.0/KintoneRestAPIClient.min.js"></script>
+  </head>
+  <body>
+    <div id="obniz-debug"></div>
+    <script>
+      var obniz = new Obniz("OBNIZ_ID_HERE");
+
+      obniz.onconnect = async function() {
+        // TODO　!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // 罠のIDを指定する
+        var record_id = 8;
+        sendToSlack(record_id);
+        sendToKintone(record_id);
+      }
+
+      function sendToSlack(record_id) {
+        let url = "*****************************************************";
+        let data = {
+          text: "罠(id:" + String(record_id) + ")が動作しました"
+        };
+
+        let dataJson = JSON.stringify(data);
+
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: url,
+          processData: false,
+          data: "payload=" + dataJson
+        }).then(
+          function(data) {},
+          function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log("post to slack");
+          }
+        );
+      }
+
+      function sendToKintone(record_id) {
+        let url = "*****************************************************";;
+        let data = {
+          record_id: record_id
+        };
+
+        let dataJson = JSON.stringify(data);
+
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: url,
+          processData: false,
+          data: "payload=" + dataJson
+        }).then(
+          function(data) {},
+          function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log("post to kintone");
+          }
+        );
+      }
+    </script>
+  </body>
+</html>

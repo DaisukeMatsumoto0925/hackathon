@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@kintone/rest-api-client": "^3.1.2",
+    "aws-sdk": "^2.1157.0",
+    "request": "^2.88.2"
+  }
+}
